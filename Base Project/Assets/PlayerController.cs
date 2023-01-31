@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float speed = 250f;
     [SerializeField] private float jumpStrength = 250f;
+    [SerializeField] private int jumpCounter = 2;
+    private int jumpCtr;
 
     [SerializeField] private Vector3 groundCheckOffset;
     [SerializeField] private float groundCheckRadius = 3.5f;
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         input = InputHandler.Instance;
+        jumpCtr = jumpCounter;
     }
 
     // Update is called once per frame
@@ -33,21 +36,28 @@ public class PlayerController : MonoBehaviour
             input.GetMove().x * speed * Time.deltaTime, 
             rb.velocity.y);
 
+        isGrounded = Physics2D.OverlapCircle(groundCheckOffset + transform.position, groundCheckRadius, groundLayer);
+
         if (jumpRequest)
         {
             //rb.velocity += Vector2.up * jumpStrength * Time.deltaTime;
             rb.AddForce(Vector2.up * jumpStrength * Time.deltaTime, ForceMode2D.Impulse);
             jumpRequest = false;
         }
+
+        if (isGrounded)
+        {
+            jumpCtr = jumpCounter;
+        }
         
     }
     private void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheckOffset + transform.position, groundCheckRadius, groundLayer);
 
-        if (input.GetButton1() && isGrounded)
+        if (input.GetButton1() && jumpCtr > 1)
         {
             Debug.Log("Jump");
+            jumpCtr--;
             jumpRequest = true;
         }
     }
