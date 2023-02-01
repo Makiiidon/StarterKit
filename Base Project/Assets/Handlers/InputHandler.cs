@@ -8,13 +8,13 @@ public class InputHandler : MonoBehaviour
 
     private Vector2 moveInput;
 
-    [SerializeField] private KeyCode button1;
-    [SerializeField] private KeyCode button2;
+    [SerializeField] private KeyCode Jump;
+    [SerializeField] private KeyCode Attack;
     [SerializeField] private KeyCode button3;
     [SerializeField] private KeyCode button4;
 
-    private bool isButton1Pressed;
-    private bool isButton2Pressed;
+    private bool isJumpPressed;
+    private bool isAttackPressed;
     private bool isButton3Pressed;
     private bool isButton4Pressed;
     // Start is called before the first frame update
@@ -25,8 +25,8 @@ public class InputHandler : MonoBehaviour
             Instance = this;
         }
 
-        isButton1Pressed = false;
-        isButton2Pressed = false;
+        isJumpPressed = false;
+        isAttackPressed = false;
         isButton3Pressed = false;
         isButton4Pressed = false;
     }
@@ -37,22 +37,22 @@ public class InputHandler : MonoBehaviour
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyDown(button1))
+        if (Input.GetKeyDown(Jump))
         {
-            isButton1Pressed = true;
+            isJumpPressed = true;
         }
-        else if (!Input.GetKeyDown(button1))
+        else if (!Input.GetKeyDown(Jump))
         {
-            isButton1Pressed = false;
+            isJumpPressed = false;
         }
 
-        if (Input.GetKeyDown(button2))
+        if (Input.GetKeyDown(Attack))
         {
-            isButton2Pressed = true;
+            isAttackPressed = true;
         }
-        else if (!Input.GetKeyDown(button2))
+        else if (!Input.GetKeyDown(Attack))
         {
-            isButton2Pressed = false;
+            isAttackPressed = false;
         }
         
         if (Input.GetKeyDown(button3))
@@ -76,10 +76,10 @@ public class InputHandler : MonoBehaviour
     }
 
     public Vector2 GetMove() { return moveInput; }
-    public bool GetButton1() { return isButton1Pressed; }
-    public bool GetButton2() { return isButton2Pressed; }
+    public bool GetJump() { return isJumpPressed; }
+    public bool GeTAttack() { return isAttackPressed; }
     public bool GetButton3() { return isButton3Pressed; }
     public bool GetButton4() { return isButton4Pressed; }
 
-    public KeyCode ReturnButton1() { return button1; }
+    public KeyCode ReturnJump() { return Jump; }
 }

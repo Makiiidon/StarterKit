@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
 
-        if (input.GetButton1() && jumpCtr > 1)
+        if (input.GetJump() && jumpCtr > 1)
         {
             Debug.Log("Jump");
             jumpCtr--;

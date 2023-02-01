@@ -24,7 +24,7 @@ public class ModifiedGravity : MonoBehaviour
             //rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
             rb.gravityScale = fallMultiplier;
         }
-        else if (rb.velocity.y > 0 && !Input.GetKey(inputHandler.ReturnButton1()))
+        else if (rb.velocity.y > 0 && !Input.GetKey(inputHandler.ReturnJump()))
         {
             //rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
             rb.gravityScale = lowJumpMultiplier;
